@@ -1,12 +1,10 @@
 ---
 job_id: ab663a974444
-schedule: "5,10,20,25,35,40,50,55 * * * *"
+schedule: {'kind': 'cron', 'expr': '5,10,20,25,35,40,50,55 * * * *', 'display': '5,10,20,25,35,40,50,55 * * * *'}
 name: Binance AI Signal Reviewer
 skills: ["binance-futures-trader"]
 status: active
-updated: 2026-04-19 13:31
 ---
-
 **⚠️ Skill 已通过 cron 自动加载，不要重复输出 skill 内容，直接执行任务。**
 
 ## 任务：Binance 合约信号 AI Review（每 5min）
@@ -54,7 +52,7 @@ from binance.trading.futures_pipeline import analyze_symbol
 from binance.data.market_data import get_24h_stats
 stats = get_24h_stats()
 for sym in ['SYM1','SYM2']: # 替换为实际符号
-    r = analyze_symbol(sym, stats); print(f'{sym}: {r["direction"]} score={r["score"]}')"
+    r = analyze_symbol(sym, stats); print(f'{sym}: {r[\"direction\"]} score={r[\"score\"]}')"
 ```
 NEUTRAL → SKIP（信号已退化）。
 

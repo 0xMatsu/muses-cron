@@ -1,18 +1,24 @@
 # Muses Cron Prompts
 
-Cron job prompts extracted for version control. 只读文件，不影响 cron job 本身。
+Version-controlled cron job prompts for Muses trading system.
+
+## Sync
+
+```bash
+# Pull latest from Hermes
+cd ~/muses-crons && python3 sync_pull.py
+
+# Push changes to Hermes (edit file first, then):
+python3 sync_push.py
+```
 
 ## Jobs
 
-| File | Job ID | Name | Schedule |
-|------|--------|------|----------|
-| 01-binance-scanner.md | b8d8528b113d | Binance Futures Scanner | 15,30,45,0 * * * * |
-| 02-binance-position-manager.md | 214b772fa12e | Binance Position Manager | every 10m |
-| 03-hyperliquid-trader.md | 5e8676ac52e7 | Hyperliquid Futures Trader | every 20m |
-| 04-hyperliquid-position-manager.md | e421599cbf3b | Hyperliquid Position Manager | every 10m |
-| 05-daily-report-morning.md | b835142767e0 | Daily Report Morning | 0 8 * * * |
-| 06-daily-report-evening.md | 5b9900595df2 | Daily Report Evening | 0 20 * * * |
-| 07-binance-ai-reviewer.md | ab663a974444 | Binance AI Signal Reviewer | 5,10,20,25,35,40,50,55 * * * * |
-
-## Sync
-修改 prompt 后需通过 `cronjob(action='update')` 同步回 job，不会自动生效。
+| # | Job | Schedule | Status |
+|---|-----|----------|--------|
+| | Binance AI Signal Reviewer | `{'kind': 'cron', 'expr': '5,10,20,25,35,40,50,55 * * * *', 'display': '5,10,20,25,35,40,50,55 * * * *'}` | :white_check_mark: |
+| | Binance Futures Scanner | `{'kind': 'cron', 'expr': '15,30,45,0 * * * *', 'display': '15,30,45,0 * * * *'}` | :white_check_mark: |
+| | Binance Position Manager | `{'kind': 'interval', 'minutes': 10, 'display': 'every 10m'}` | :white_check_mark: |
+| | Daily Report Evening | `{'kind': 'cron', 'expr': '0 20 * * *', 'display': '0 20 * * *'}` | :white_check_mark: |
+| | Daily Report Morning | `{'kind': 'cron', 'expr': '0 8 * * *', 'display': '0 8 * * *'}` | :white_check_mark: |
+| | Hyperliquid AI Trader | `{'kind': 'interval', 'minutes': 20, 'display': 'every 20m'}` | :white_check_mark: |
